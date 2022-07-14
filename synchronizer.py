@@ -17,6 +17,8 @@ layout = [
 
 from tkinter import *
 from tkinter import Tk, ttk
+import time
+
 
 # cores -------------------------
 c0 = "#f0f3f5"  # Preta 
@@ -25,12 +27,6 @@ c2 = "#3fb5a3"  # verde
 c3 = "#38576b"  # valor
 c4 = "#403d3d"  # letra 
 
-
-def teste():
-    saida = 'saida'
-    print(saida)
-
-    texto_saida['text'] = saida
 
 # criando janela de input's -------------------------
 janela = Tk()
@@ -53,8 +49,16 @@ l_sinc.place(x=5, y=5)
 l_linha = Label(frame_cima, text='', width=230, anchor=NW, font=('Ivy 1'), bg=c2, fg=c4)
 l_linha.place(x=10, y=45)
 
+# Pegando horário local do servidor
+def criar_serv():
+    horaUTC = time.localtime()
+    horaServer = [horaUTC[3], horaUTC[4]] 
+
+    print(horaServer) 
+
+
 # Criando Servidor
-c_serv = Button(frame_baixo, text='Criar Servidor', width=12, height=1, anchor=NW, font=('Ivy 10 bold'), bg=c2, fg=c1, relief=RAISED)
+c_serv = Button(frame_baixo, command=criar_serv, text='Criar Servidor', width=12, height=1, anchor=NW, font=('Ivy 10 bold'), bg=c2, fg=c1, relief=RAISED)
 c_serv.place(x=15, y=10)
 
 # Criando Cliente
@@ -79,15 +83,3 @@ subm_cli1 = Button(frame_baixo, text='Enviar', width=5, height=1, anchor=NW, fon
 subm_cli1.place(x=14, y=205)
 
 janela.mainloop()
-
-
-
-'''
-botao = Button(janela, text='Criar', command=teste)
-botao.grid(column=0, row=1, padx=10, pady=10)
-
-texto_saida = Label(janela, text='')
-texto_saida.grid(column=0, row=2, padx=10, pady=10)
-
-'''
-
