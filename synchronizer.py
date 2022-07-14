@@ -2,17 +2,6 @@
 '''
     Sicronizador de Clock - Algoritmo de Berkeley
     DUPLA: Alinne Farias e Vitoria Neris.
-
-
-# Layout
-sg.theme('Reddit')
-layout = [
-    [sg.Button('Criar Servidor')],
-    [sg.Button('Criar Cliente')],
-    [sg.Text('Hora Local'),sg.Input(key='hr_local')],
-    [sg.Text('Hora de Envio'),sg.Input(key='hr_envio')],
-    [sg.Button('Enviar')]
-]
 '''
 
 from tkinter import *
@@ -31,15 +20,15 @@ c4 = "#403d3d"  # letra
 # criando janela de input's -------------------------
 janela = Tk()
 janela.title('Avaliação de SD')
-janela.geometry('400x620')
+janela.geometry('450x620')
 janela.configure(background=c0)
 janela.resizable(width=FALSE, height=FALSE)
 
 # divisão de tela ----------------------------------------
-frame_cima = Frame(janela, width=410, height=50, bg=c1, relief='flat')
+frame_cima = Frame(janela, width=450, height=50, bg=c1, relief='flat')
 frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
 
-frame_baixo = Frame(janela, width=410, height=600, bg=c1, relief='flat')
+frame_baixo = Frame(janela, width=450, height=600, bg=c1, relief='flat')
 frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
 # configurando frame de cima ----------------------------------------
@@ -49,17 +38,43 @@ l_sinc.place(x=50, y=10)
 l_linha = Label(frame_cima, text='', width=300, anchor=NW, font=('Ivy 1'), bg=c2, fg=c4)
 l_linha.place(x=50, y=45)
 
+
+
+# Definindo Clock Lógico
+def clock_log():
+    # hs = horaServer.get()
+    hl1 = e1_local.get()
+    hl2 = e2_local.get()
+    hl3 = e3_local.get()
+
+    # cl = hl1+hl2+hl3/4
+    print(hl1)
+    print(hl2)
+    print(hl3)
+
+    
 # Pegando horário local do servidor
 def criar_serv():
+      
+    msg = 'Servidor criado!'
+    text_rsp['text'] = msg
+
+
+def cria_serv():
+    global horaServer
     horaUTC = time.localtime()
     horaServer = [horaUTC[3], horaUTC[4]] 
     
-    msg = 'Servidor criado!'
-    text_rsp['text'] = msg
-    return horaServer
+    return str(horaServer[0])+':'+str(horaServer[1])
+    
 
 # Pegando horário (local e de envio) do cliente1
 def criar_clientes():
+
+    nova_janela()
+
+def horaLocCliente1():
+    global horaLocCli1
     hr_local_c1 = e1_local.get()
     hr_env_c1 = e1_env.get()
 
@@ -96,8 +111,6 @@ def criar_clientes():
     print(horaLocCli3)
     print(horaEnvCli3)
 
-    nova_janela()
-
 # Após coletar dados
 def nova_janela():
     janela2 = Tk()
@@ -106,6 +119,23 @@ def nova_janela():
     janela2.configure(background=c0)
     janela2.resizable(width=FALSE, height=FALSE)
 
+    x = cria_serv()
+    #hr1, min1 = [int(t) for t in horaServer.split(":")]
+    #s = 'Hora Local do Servidor: '
+    #h = horaServer
+    #h = str(':'.split(horaServer))
+    #result = f'{s}{h}'
+    #print(result)
+
+
+    xx = horaLocCliente1()
+    #hr1, min1 = [int(t) for t in horaServer.split(":")]
+    ss = 'Hora Local Cliente 1: '
+    hh = horaLocCli1
+    #h = str(':'.split(horaServer))
+    result2 = f'{ss}{hh}'
+    #print(result)
+
     frame_cima = Frame(janela2, width=410, height=50, bg=c1, relief='flat')
     frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
 
@@ -113,7 +143,7 @@ def nova_janela():
     frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
     #################################### FRAME_CIMA ######################################
-    l_sinc = Label(frame_cima, text='Servidor', anchor=NE, font=('Ivy 18'), bg=c1, fg=c4)
+    l_sinc = Label(frame_cima, text='Sincronizando...', anchor=NE, font=('Ivy 18'), bg=c1, fg=c4)
     l_sinc.place(x=40, y=12)
 
     l_linha = Label(frame_cima, text='', width=300, anchor=NW, font=('Ivy 1'), bg=c2, fg=c4)
@@ -121,11 +151,11 @@ def nova_janela():
 
     ################################### FRAME_BAIXO ######################################
     # Horário Local ----------------------------------------------------------------------------------
-    hl = Label(frame_baixo, text='Hora local: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hl = Label(frame_baixo, text=x, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     hl.place(x=40, y=25)
 
     # Horário Local Clientes -------------------------------------------------------------------------
-    hlc1 = Label(frame_baixo, text='Hora Local Cliente 1: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hlc1 = Label(frame_baixo, text=str(result2), anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     hlc1.place(x=40, y=60)
     hlc2 = Label(frame_baixo, text='Hora Local Cliente 2: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     hlc2.place(x=40, y=85)
@@ -137,11 +167,11 @@ def nova_janela():
     clock.place(x=40, y=145)
 
     # Ajuste do Clock ----------------------------------------------------------------------------------
-    ajuste1 = Label(frame_baixo, text='Ajuste do Clock (C1): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste1 = Label(frame_baixo, text='Hr/Envio Ajustado(C1): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste1.place(x=40, y=180)
-    ajuste2 = Label(frame_baixo, text='Ajuste do Clock (C2): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste2 = Label(frame_baixo, text='Hr/Envio Ajustado(C2): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste2.place(x=40, y=205)
-    ajuste3 = Label(frame_baixo, text='Ajuste do Clock (C3): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste3 = Label(frame_baixo, text='Hr/Envio Ajustado(C3): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste3.place(x=40, y=230)
 
     # Ordem de Envio ----------------------------------------------------------------------------------
@@ -153,7 +183,6 @@ def nova_janela():
     ode2.place(x=40, y=320)
     ode3 = Label(frame_baixo, text='3º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ode3.place(x=40, y=345)
-
 
 ###################################### SERVIDOR ###############################################
 # Criando Servidor
