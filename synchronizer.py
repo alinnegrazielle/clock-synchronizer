@@ -31,7 +31,7 @@ c4 = "#403d3d"  # letra
 # criando janela de input's -------------------------
 janela = Tk()
 janela.title('Avaliação de SD')
-janela.geometry('400x650')
+janela.geometry('400x620')
 janela.configure(background=c0)
 janela.resizable(width=FALSE, height=FALSE)
 
@@ -86,15 +86,15 @@ c1_nome.place(x=50, y=90)
 
 # Horário Local ----------------------------------------------------------------------------------------
 h_local = Label(frame_baixo, text='Hr Local', anchor=NW, font=('Ivy 12'), bg=c1, fg=c4)
-h_local.place(x=50, y=110)
+h_local.place(x=50, y=115)
 e_local = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
-e_local.place(x=50, y=130)
+e_local.place(x=50, y=135)
 
 # Horário de Envio --------------------------------------------------------------------------------------
 h_env = Label(frame_baixo, text='Hr de Envio', anchor=NW, font=('Ivy 12'), bg=c1, fg=c4)
-h_env.place(x=50, y=155)
+h_env.place(x=50, y=160)
 e_env = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
-e_env.place(x=50, y=175)
+e_env.place(x=50, y=180)
 
 ###################################### CLIENTE 2 ###############################################
 # Input's Cliente 2 ----------------------------------------
@@ -103,15 +103,15 @@ c2_nome.place(x=50, y=210)
 
 # Horário Local ----------------------------------------------------------------------------------------
 h2_local = Label(frame_baixo, text='Hr Local', anchor=NW, font=('Ivy 12'), bg=c1, fg=c4)
-h2_local.place(x=50, y=230)
+h2_local.place(x=50, y=235)
 e2_local = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
-e2_local.place(x=50, y=250)
+e2_local.place(x=50, y=255)
 
 # Horário de Envio --------------------------------------------------------------------------------------
 h2_env = Label(frame_baixo, text='Hr de Envio', anchor=NW, font=('Ivy 12'), bg=c1, fg=c4)
-h2_env.place(x=50, y=275)
+h2_env.place(x=50, y=280)
 e2_env = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
-e2_env.place(x=50, y=295)
+e2_env.place(x=50, y=300)
 
 ###################################### CLIENTE 3 ###############################################
 # Input's Cliente 3 ----------------------------------------
@@ -120,15 +120,15 @@ c3_nome.place(x=50, y=330)
 
 # Horário Local ----------------------------------------------------------------------------------------
 h3_local = Label(frame_baixo, text='Hr Local', anchor=NW, font=('Ivy 12'), bg=c1, fg=c4)
-h3_local.place(x=50, y=350)
+h3_local.place(x=50, y=355)
 e3_local = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
-e3_local.place(x=50, y=370)
+e3_local.place(x=50, y=375)
 
 # Horário de Envio --------------------------------------------------------------------------------------
 h3_env = Label(frame_baixo, text='Hr de Envio', anchor=NW, font=('Ivy 12'), bg=c1, fg=c4)
-h3_env.place(x=50, y=395)
+h3_env.place(x=50, y=400)
 e3_env = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
-e3_env.place(x=50, y=415)
+e3_env.place(x=50, y=420)
 
 # Submeter infos Cliente 1
 subm_cli1 = Button(frame_baixo, command=criar_clientes, text='Enviar', width=5, height=1, anchor=NW, font=('Ivy 15 bold'), bg=c2, fg=c1, relief=RAISED)
