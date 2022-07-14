@@ -74,6 +74,9 @@ h_env = Label(frame_baixo, text='Hr de Envio', anchor=NW, font=('Ivy 10'), bg=c1
 h_env.place(x=14, y=155)
 e_env = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
 e_env.place(x=20, y=175)
+# Submeter infos Cliente 1
+subm_cli1 = Button(frame_baixo, text='Enviar', width=5, height=1, anchor=NW, font=('Ivy 10 bold'), bg=c2, fg=c1, relief=RAISED)
+subm_cli1.place(x=14, y=205)
 
 janela.mainloop()
 
