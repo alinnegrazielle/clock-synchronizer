@@ -67,15 +67,16 @@ c_cli.place(x=14, y=50)
 
 def criar_cli1():
     hr_local_c1 = e_local.get()
-    #   hr_env_c1 = e_env.get()
+    hr_env_c1 = e_env.get()
 
     hr_loc_1, min_loc_1 = [int(t) for t in hr_local_c1.split(":")] # definindo hora cliente 1
-    horaCli1 = [hr_loc_1, min_loc_1]
+    horaLocCli1 = [hr_loc_1, min_loc_1]
 
-    #hr_env_1, min_env_1 = [int(t) for t in hr_env_c1.split(":")] # definindo hora cliente 1
-    #horaCli1 = [hr_env_1, min_env_1]
+    hr_env_1, min_env_1 = [int(t) for t in hr_env_c1.split(":")] # definindo hora cliente 1
+    horaEnvCli1 = [hr_env_1, min_env_1]
 
-    print(horaCli1)
+    print(horaLocCli1)
+    print(horaEnvCli1)
 
 # Input's Cliente 1 ----------------------------------------
 c1_nome = Label(frame_baixo, text='Cliente 1', anchor=NW, font=('Ivy 10'), bg=c1, fg=c4)
