@@ -44,7 +44,7 @@ frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
 
 # configurando frame de cima ----------------------------------------
 l_sinc = Label(frame_cima, text='Sincronizador de Clock', anchor=NE, font=('Ivy 20'), bg=c1, fg=c4)
-l_sinc.place(x=50, y=5)
+l_sinc.place(x=50, y=10)
 
 l_linha = Label(frame_cima, text='', width=300, anchor=NW, font=('Ivy 1'), bg=c2, fg=c4)
 l_linha.place(x=50, y=45)
@@ -53,22 +53,15 @@ l_linha.place(x=50, y=45)
 def criar_serv():
     horaUTC = time.localtime()
     horaServer = [horaUTC[3], horaUTC[4]] 
-
-    print(horaServer) 
-
-###################################### SERVIDOR ###############################################
-# Criando Servidor
-c_serv = Button(frame_baixo, command=criar_serv, text='Criar Servidor', width=12, height=1, anchor=NW, font=('Ivy 15 bold'), bg=c2, fg=c1, relief=RAISED)
-c_serv.place(x=110, y=25)
-
-# Criando Cliente
-# c_cli = Button(frame_baixo, text='Criar Cliente', width=12, height=1, anchor=NW, font=('Ivy 15 bold'), bg=c2, fg=c1, relief=RAISED)
-# c_cli.place(x=14, y=50)
+    
+    msg = 'Servidor criado!'
+    text_rsp['text'] = msg
+    return horaServer
 
 # Pegando horário (local e de envio) do cliente1
 def criar_clientes():
-    hr_local_c1 = e_local.get()
-    hr_env_c1 = e_env.get()
+    hr_local_c1 = e1_local.get()
+    hr_env_c1 = e1_env.get()
 
     hr_loc_1, min_loc_1 = [int(t) for t in hr_local_c1.split(":")] # definindo hora cliente 1
     horaLocCli1 = [hr_loc_1, min_loc_1]
@@ -79,6 +72,97 @@ def criar_clientes():
     print(horaLocCli1)
     print(horaEnvCli1)
 
+    hr_local_c2 = e2_local.get()
+    hr_env_c2 = e2_env.get()
+
+    hr_loc_2, min_loc_2 = [int(t) for t in hr_local_c2.split(":")] # definindo hora cliente 1
+    horaLocCli2 = [hr_loc_2, min_loc_2]
+
+    hr_env_2, min_env_2 = [int(t) for t in hr_env_c2.split(":")] # definindo hora cliente 1
+    horaEnvCli2 = [hr_env_2, min_env_2]
+
+    print(horaLocCli2)
+    print(horaEnvCli2)
+
+    hr_local_c3 = e3_local.get()
+    hr_env_c3 = e3_env.get()
+
+    hr_loc_3, min_loc_3 = [int(t) for t in hr_local_c3.split(":")] # definindo hora cliente 1
+    horaLocCli3 = [hr_loc_3, min_loc_3]
+
+    hr_env_3, min_env_3 = [int(t) for t in hr_env_c3.split(":")] # definindo hora cliente 1
+    horaEnvCli3 = [hr_env_3, min_env_3]
+
+    print(horaLocCli3)
+    print(horaEnvCli3)
+
+    nova_janela()
+
+# Após coletar dados
+def nova_janela():
+    janela2 = Tk()
+    janela2.title('Resultado')
+    janela2.geometry('400x500')
+    janela2.configure(background=c0)
+    janela2.resizable(width=FALSE, height=FALSE)
+
+    frame_cima = Frame(janela2, width=410, height=50, bg=c1, relief='flat')
+    frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
+
+    frame_baixo = Frame(janela2, width=410, height=600, bg=c1, relief='flat')
+    frame_baixo.grid(row=1, column=0, pady=1, padx=0, sticky=NSEW)
+
+    #################################### FRAME_CIMA ######################################
+    l_sinc = Label(frame_cima, text='Servidor', anchor=NE, font=('Ivy 18'), bg=c1, fg=c4)
+    l_sinc.place(x=40, y=12)
+
+    l_linha = Label(frame_cima, text='', width=300, anchor=NW, font=('Ivy 1'), bg=c2, fg=c4)
+    l_linha.place(x=40, y=45)
+
+    ################################### FRAME_BAIXO ######################################
+    # Horário Local ----------------------------------------------------------------------------------
+    hl = Label(frame_baixo, text='Hora local: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hl.place(x=40, y=25)
+
+    # Horário Local Clientes -------------------------------------------------------------------------
+    hlc1 = Label(frame_baixo, text='Hora Local Cliente 1: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hlc1.place(x=40, y=60)
+    hlc2 = Label(frame_baixo, text='Hora Local Cliente 2: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hlc2.place(x=40, y=85)
+    hlc3 = Label(frame_baixo, text='Hora Local Cliente 3: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hlc3.place(x=40, y=110)
+
+    # Clock Lógico ----------------------------------------------------------------------------------
+    clock = Label(frame_baixo, text='Clock Lógico: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    clock.place(x=40, y=145)
+
+    # Ajuste do Clock ----------------------------------------------------------------------------------
+    ajuste1 = Label(frame_baixo, text='Ajuste do Clock (C1): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste1.place(x=40, y=180)
+    ajuste2 = Label(frame_baixo, text='Ajuste do Clock (C2): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste2.place(x=40, y=205)
+    ajuste3 = Label(frame_baixo, text='Ajuste do Clock (C3): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste3.place(x=40, y=230)
+
+    # Ordem de Envio ----------------------------------------------------------------------------------
+    ode = Label(frame_baixo, text='Ordem de Envio', anchor=NW, font=('Ivy 18 bold'), bg=c1, fg=c4)
+    ode.place(x=40, y=265)
+    ode1 = Label(frame_baixo, text='1º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ode1.place(x=40, y=295)
+    ode2 = Label(frame_baixo, text='2º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ode2.place(x=40, y=320)
+    ode3 = Label(frame_baixo, text='3º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ode3.place(x=40, y=345)
+
+
+###################################### SERVIDOR ###############################################
+# Criando Servidor
+c_serv = Button(frame_baixo, command=criar_serv, text='Criar Servidor', width=12, height=1, anchor=NW, font=('Ivy 15 bold'), bg=c2, fg=c1, relief=RAISED)
+c_serv.place(x=110, y=25)
+
+text_rsp = Label(frame_baixo, text='')
+text_rsp.place(x=150, y=65)
+
 ###################################### CLIENTE 1 ###############################################
 # Input's Cliente 1 ----------------------------------------
 c1_nome = Label(frame_baixo, text='Cliente 1', anchor=NW, font=('Ivy 15 bold'), bg=c1, fg=c4)
@@ -87,14 +171,14 @@ c1_nome.place(x=50, y=90)
 # Horário Local ----------------------------------------------------------------------------------------
 h_local = Label(frame_baixo, text='Hr Local', anchor=NW, font=('Ivy 12'), bg=c1, fg=c4)
 h_local.place(x=50, y=115)
-e_local = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
-e_local.place(x=50, y=135)
+e1_local = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
+e1_local.place(x=50, y=135)
 
 # Horário de Envio --------------------------------------------------------------------------------------
 h_env = Label(frame_baixo, text='Hr de Envio', anchor=NW, font=('Ivy 12'), bg=c1, fg=c4)
 h_env.place(x=50, y=160)
-e_env = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
-e_env.place(x=50, y=180)
+e1_env = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
+e1_env.place(x=50, y=180)
 
 ###################################### CLIENTE 2 ###############################################
 # Input's Cliente 2 ----------------------------------------
@@ -131,7 +215,7 @@ e3_env = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthi
 e3_env.place(x=50, y=420)
 
 # Submeter infos Cliente 1
-subm_cli1 = Button(frame_baixo, command=criar_clientes, text='Enviar', width=5, height=1, anchor=NW, font=('Ivy 15 bold'), bg=c2, fg=c1, relief=RAISED)
+subm_cli1 = Button(frame_baixo, command=criar_clientes, text='Enviar', width=5, height=1, anchor=NW, font=('Ivy 15 bold'), bg=c2, fg=c1, relief=RAISED, overrelief=RIDGE)
 subm_cli1.place(x=50, y=470)
 
 janela.mainloop()
