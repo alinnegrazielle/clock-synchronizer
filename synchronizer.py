@@ -65,21 +65,36 @@ c_serv.place(x=15, y=10)
 c_cli = Button(frame_baixo, text='Criar Cliente', width=12, height=1, anchor=NW, font=('Ivy 10 bold'), bg=c2, fg=c1, relief=RAISED)
 c_cli.place(x=14, y=50)
 
+def criar_cli1():
+    hr_local_c1 = e_local.get()
+    #   hr_env_c1 = e_env.get()
+
+    hr_loc_1, min_loc_1 = [int(t) for t in hr_local_c1.split(":")] # definindo hora cliente 1
+    horaCli1 = [hr_loc_1, min_loc_1]
+
+    #hr_env_1, min_env_1 = [int(t) for t in hr_env_c1.split(":")] # definindo hora cliente 1
+    #horaCli1 = [hr_env_1, min_env_1]
+
+    print(horaCli1)
+
 # Input's Cliente 1 ----------------------------------------
 c1_nome = Label(frame_baixo, text='Cliente 1', anchor=NW, font=('Ivy 10'), bg=c1, fg=c4)
 c1_nome.place(x=10, y=90)
+
 # Horário Local ----------------------------------------------------------------------------------------
 h_local = Label(frame_baixo, text='Hr Local', anchor=NW, font=('Ivy 10'), bg=c1, fg=c4)
 h_local.place(x=14, y=110)
 e_local = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
 e_local.place(x=20, y=130)
+
 # Horário de Envio --------------------------------------------------------------------------------------
 h_env = Label(frame_baixo, text='Hr de Envio', anchor=NW, font=('Ivy 10'), bg=c1, fg=c4)
 h_env.place(x=14, y=155)
 e_env = Entry(frame_baixo, width=8, justify='left', font=("", 12), highlightthickness=1, relief='solid')
 e_env.place(x=20, y=175)
+
 # Submeter infos Cliente 1
-subm_cli1 = Button(frame_baixo, text='Enviar', width=5, height=1, anchor=NW, font=('Ivy 10 bold'), bg=c2, fg=c1, relief=RAISED)
+subm_cli1 = Button(frame_baixo, command=criar_cli1, text='Enviar', width=5, height=1, anchor=NW, font=('Ivy 10 bold'), bg=c2, fg=c1, relief=RAISED)
 subm_cli1.place(x=14, y=205)
 
 janela.mainloop()
