@@ -154,6 +154,11 @@ def clock_log():
     newArray = myArray/myInt
     #print(newArray)
 
+    if newArray[1] > 60 :
+        dif = newArray[1] - 60 # calcula a diferença
+        newArray[1] = dif # substitui o valor
+        newArray[0] = newArray[0]+1 # add mais 1h
+
     #clock formatado
     hr = int(newArray[0])
     min = int(newArray[1])
@@ -249,8 +254,8 @@ def nova_janela():
         (newhr2),
         (newhr3),
     ]
-    print(sorted(pegarEnvios))
-    [pri, seg, ter] = sorted(pegarEnvios)
+    ordenando = (sorted(pegarEnvios))
+    [pri, seg, ter] = ordenando
 
     msgord1 = '1º Cliente: '
     primeiro = str(pri[0])+':'+str(pri[1])
