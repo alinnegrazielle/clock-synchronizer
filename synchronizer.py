@@ -4,6 +4,7 @@
     DUPLA: Alinne Farias e Vitoria Neris.
 '''
 
+from glob import glob
 from tkinter import *
 from tkinter import Tk, ttk
 import time
@@ -69,6 +70,7 @@ def horaLocCliente1():
     return str(horaLocCli1[0])+':'+str(horaLocCli1[1])
 
 def horaEnvCliente1():
+    global horaEnvCli1
     hr_env_c1 = e1_env.get()
     hr_env_1, min_env_1 = [int(t) for t in hr_env_c1.split(":")] # definindo hora cliente 1
     horaEnvCli1 = [hr_env_1, min_env_1]
@@ -107,26 +109,66 @@ def horaEnvCliente3():
 
     return str(horaEnvCli3[0])+':'+str(horaEnvCli3[1])
 
+# diferença do hr envio de cada cliente pelo local
+def difCli1():
+    global difC1
+    he1 = horaEnvCli1
+    hrl = horaLocCli1
+    difC1 = [he1[0]-hrl[0],he1[1]-hrl[1]]
+
+    return str(difC1[0])+':'+str(difC1[1])
+
+def difCli2():
+    global difC2
+    he2 = horaEnvCli2
+    hr2 = horaLocCli2
+    difC2 = [he2[0]-hr2[0],he2[1]-hr2[1]]
+
+    return str(difC2[0])+':'+str(difC2[1])
+
+def difCli3():
+    global difC3
+    he3 = horaEnvCli3
+    hr3 = horaLocCli3
+    difC3 = [he3[0]-hr3[0],he3[1]-hr3[1]]
+
+    return str(difC3[0])+':'+str(difC3[1])
+
 # Definindo Clock Lógico
 def clock_log():
-    global newArray
+    global hr, min
     hs = horaServer
     hl1 = horaLocCli1
     hl2 = horaLocCli2
     hl3 = horaLocCli3
 
+    # cria a lista com todos os horários e seu tamanho
     newlist = (hs,hl1,hl2,hl3)
     cl = list(map(sum, zip(hs,hl1,hl2,hl3)))
     tam = len(newlist)
     
+    # gera o clock não formatado
     myArray = np.array(cl)
     myInt = tam
     newArray = myArray/myInt
     #print(newArray)
 
-    
-    return str(newArray[0])+':'+str(newArray[1])
+    #clock formatado
+    hr = int(newArray[0])
+    min = int(newArray[1])
 
+    return str(hr)+':'+str(min)
+
+# somando a diferença de cada cliente com o clock
+def envSinc1():
+    global newhr1
+    d1 = difC1
+    
+    clochr = [hr, min]
+
+    newhr1 = [d1[0]+clochr[0],d1[1]+clochr[1]]
+
+    return str(newhr1[0])+':'+str(newhr1[1])
 
 # Após coletar dados
 def nova_janela():
@@ -161,9 +203,16 @@ def nova_janela():
 
     clock_log()
     i = 'Clock Lógico: '
-    j = str(newArray[0])+':'+str(newArray[1])
+    j = str(hr)+':'+str(min)
     resultclock = f'{i}{j}'
-  
+    #-------------------------------------------------------------------
+
+    envSinc1()
+    k = 'Hr/Envio Ajustado(C1): '
+    l = str(newhr1[0])+':'+str(newhr1[1])
+    envio1 = f'{k}{l}'
+
+
 
     frame_cima = Frame(janela2, width=410, height=50, bg=c1, relief='flat')
     frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
@@ -196,11 +245,11 @@ def nova_janela():
     clock.place(x=40, y=145)
 
     # Ajuste do Clock ----------------------------------------------------------------------------------
-    ajuste1 = Label(frame_baixo, text='Hr/Envio Ajustado(C1): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste1 = Label(frame_baixo, text=envio1, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste1.place(x=40, y=180)
-    ajuste2 = Label(frame_baixo, text='Hr/Envio Ajustado(C2): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste2 = Label(frame_baixo, text='', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste2.place(x=40, y=205)
-    ajuste3 = Label(frame_baixo, text='Hr/Envio Ajustado(C3): ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste3 = Label(frame_baixo, text='', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste3.place(x=40, y=230)
 
     # Ordem de Envio ----------------------------------------------------------------------------------
