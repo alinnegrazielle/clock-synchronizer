@@ -7,6 +7,7 @@
 from tkinter import *
 from tkinter import Tk, ttk
 import time
+import numpy as np
 
 
 # cores -------------------------
@@ -38,20 +39,6 @@ l_sinc.place(x=50, y=10)
 l_linha = Label(frame_cima, text='', width=300, anchor=NW, font=('Ivy 1'), bg=c2, fg=c4)
 l_linha.place(x=50, y=45)
 
-
-
-# Definindo Clock Lógico
-def clock_log():
-    # hs = horaServer.get()
-    hl1 = e1_local.get()
-    hl2 = e2_local.get()
-    hl3 = e3_local.get()
-
-    # cl = hl1+hl2+hl3/4
-    print(hl1)
-    print(hl2)
-    print(hl3)
-
     
 # Pegando horário local do servidor
 def criar_serv():
@@ -76,40 +63,70 @@ def criar_clientes():
 def horaLocCliente1():
     global horaLocCli1
     hr_local_c1 = e1_local.get()
-    hr_env_c1 = e1_env.get()
-
     hr_loc_1, min_loc_1 = [int(t) for t in hr_local_c1.split(":")] # definindo hora cliente 1
     horaLocCli1 = [hr_loc_1, min_loc_1]
 
+    return str(horaLocCli1[0])+':'+str(horaLocCli1[1])
+
+def horaEnvCliente1():
+    hr_env_c1 = e1_env.get()
     hr_env_1, min_env_1 = [int(t) for t in hr_env_c1.split(":")] # definindo hora cliente 1
     horaEnvCli1 = [hr_env_1, min_env_1]
 
-    print(horaLocCli1)
-    print(horaEnvCli1)
+    return str(horaEnvCli1[0])+':'+str(horaEnvCli1[1])
 
+def horaLocCliente2():
+    global horaLocCli2
     hr_local_c2 = e2_local.get()
-    hr_env_c2 = e2_env.get()
-
     hr_loc_2, min_loc_2 = [int(t) for t in hr_local_c2.split(":")] # definindo hora cliente 1
     horaLocCli2 = [hr_loc_2, min_loc_2]
 
+    return str(horaLocCli2[0])+':'+str(horaLocCli2[1])
+
+def horaEnvCliente2():
+    global horaEnvCli2
+    hr_env_c2 = e2_env.get()
     hr_env_2, min_env_2 = [int(t) for t in hr_env_c2.split(":")] # definindo hora cliente 1
     horaEnvCli2 = [hr_env_2, min_env_2]
 
-    print(horaLocCli2)
-    print(horaEnvCli2)
+    return str(horaEnvCli2[0])+':'+str(horaEnvCli2[1])
 
+def horaLocCliente3():
+    global horaLocCli3
     hr_local_c3 = e3_local.get()
-    hr_env_c3 = e3_env.get()
-
     hr_loc_3, min_loc_3 = [int(t) for t in hr_local_c3.split(":")] # definindo hora cliente 1
     horaLocCli3 = [hr_loc_3, min_loc_3]
 
+    return str(horaLocCli3[0])+':'+str(horaLocCli3[1])
+    
+def horaEnvCliente3():
+    global horaEnvCli3
+    hr_env_c3 = e3_env.get()
     hr_env_3, min_env_3 = [int(t) for t in hr_env_c3.split(":")] # definindo hora cliente 1
     horaEnvCli3 = [hr_env_3, min_env_3]
 
-    print(horaLocCli3)
-    print(horaEnvCli3)
+    return str(horaEnvCli3[0])+':'+str(horaEnvCli3[1])
+
+# Definindo Clock Lógico
+def clock_log():
+    global newArray
+    hs = horaServer
+    hl1 = horaLocCli1
+    hl2 = horaLocCli2
+    hl3 = horaLocCli3
+
+    newlist = (hs,hl1,hl2,hl3)
+    cl = list(map(sum, zip(hs,hl1,hl2,hl3)))
+    tam = len(newlist)
+    
+    myArray = np.array(cl)
+    myInt = tam
+    newArray = myArray/myInt
+    #print(newArray)
+
+    
+    return str(newArray[0])+':'+str(newArray[1])
+
 
 # Após coletar dados
 def nova_janela():
@@ -119,22 +136,34 @@ def nova_janela():
     janela2.configure(background=c0)
     janela2.resizable(width=FALSE, height=FALSE)
 
-    x = cria_serv()
-    #hr1, min1 = [int(t) for t in horaServer.split(":")]
-    #s = 'Hora Local do Servidor: '
-    #h = horaServer
-    #h = str(':'.split(horaServer))
-    #result = f'{s}{h}'
-    #print(result)
+    #---------------retornando o horário local do servidor-------------
+    cria_serv()
+    a = 'Hr Local do Servidor: '
+    b = str(horaServer[0])+':'+str(horaServer[1])
+    resultserv = f'{a}{b}'
+    
+    # ---------------retornando o horário local dos clientes------------
+    horaLocCliente1()
+    c = 'Hora Local Cliente 1: '
+    d = str(horaLocCli1[0])+':'+str(horaLocCli1[1])
+    result1 = f'{c}{d}'
 
+    horaLocCliente2()
+    e = 'Hora Local Cliente 2: '
+    f = str(horaLocCli2[0])+':'+str(horaLocCli2[1])
+    result2 = f'{e}{f}'
 
-    xx = horaLocCliente1()
-    #hr1, min1 = [int(t) for t in horaServer.split(":")]
-    ss = 'Hora Local Cliente 1: '
-    hh = horaLocCli1
-    #h = str(':'.split(horaServer))
-    result2 = f'{ss}{hh}'
-    #print(result)
+    horaLocCliente3()
+    g = 'Hora Local Cliente 3: '
+    h = str(horaLocCli3[0])+':'+str(horaLocCli3[1])
+    result3 = f'{g}{h}'
+    #-------------------------------------------------------------------
+
+    clock_log()
+    i = 'Clock Lógico: '
+    j = str(newArray[0])+':'+str(newArray[1])
+    resultclock = f'{i}{j}'
+  
 
     frame_cima = Frame(janela2, width=410, height=50, bg=c1, relief='flat')
     frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
@@ -151,19 +180,19 @@ def nova_janela():
 
     ################################### FRAME_BAIXO ######################################
     # Horário Local ----------------------------------------------------------------------------------
-    hl = Label(frame_baixo, text=x, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hl = Label(frame_baixo, text=resultserv, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     hl.place(x=40, y=25)
 
     # Horário Local Clientes -------------------------------------------------------------------------
-    hlc1 = Label(frame_baixo, text=str(result2), anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hlc1 = Label(frame_baixo, text=result1, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     hlc1.place(x=40, y=60)
-    hlc2 = Label(frame_baixo, text='Hora Local Cliente 2: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hlc2 = Label(frame_baixo, text=result2, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     hlc2.place(x=40, y=85)
-    hlc3 = Label(frame_baixo, text='Hora Local Cliente 3: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    hlc3 = Label(frame_baixo, text=result3, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     hlc3.place(x=40, y=110)
 
     # Clock Lógico ----------------------------------------------------------------------------------
-    clock = Label(frame_baixo, text='Clock Lógico: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    clock = Label(frame_baixo, text=resultclock, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     clock.place(x=40, y=145)
 
     # Ajuste do Clock ----------------------------------------------------------------------------------
@@ -176,13 +205,13 @@ def nova_janela():
 
     # Ordem de Envio ----------------------------------------------------------------------------------
     ode = Label(frame_baixo, text='Ordem de Envio', anchor=NW, font=('Ivy 18 bold'), bg=c1, fg=c4)
-    ode.place(x=40, y=265)
+    ode.place(x=40, y=275)
     ode1 = Label(frame_baixo, text='1º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
-    ode1.place(x=40, y=295)
+    ode1.place(x=40, y=310)
     ode2 = Label(frame_baixo, text='2º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
-    ode2.place(x=40, y=320)
+    ode2.place(x=40, y=335)
     ode3 = Label(frame_baixo, text='3º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
-    ode3.place(x=40, y=345)
+    ode3.place(x=40, y=360)
 
 ###################################### SERVIDOR ###############################################
 # Criando Servidor
