@@ -18,6 +18,8 @@ c2 = "#3fb5a3"  # verde
 c3 = "#38576b"  # valor
 c4 = "#403d3d"  # letra 
 
+difC1 = list()
+
 
 # criando janela de input's -------------------------
 janela = Tk()
@@ -113,8 +115,8 @@ def horaEnvCliente3():
 def difCli1():
     global difC1
     he1 = horaEnvCli1
-    hrl = horaLocCli1
-    difC1 = [he1[0]-hrl[0],he1[1]-hrl[1]]
+    hr1 = horaLocCli1
+    difC1 = [he1[0]-hr1[0],he1[1]-hr1[1]]
 
     return str(difC1[0])+':'+str(difC1[1])
 
@@ -133,6 +135,7 @@ def difCli3():
     difC3 = [he3[0]-hr3[0],he3[1]-hr3[1]]
 
     return str(difC3[0])+':'+str(difC3[1])
+
 
 # Definindo Clock Lógico
 def clock_log():
@@ -162,13 +165,27 @@ def clock_log():
 # somando a diferença de cada cliente com o clock
 def envSinc1():
     global newhr1
-    d1 = difC1
-    
     clochr = [hr, min]
 
-    newhr1 = [d1[0]+clochr[0],d1[1]+clochr[1]]
+    newhr1 = [difC1[0]+clochr[0],difC1[1]+clochr[1]]
 
     return str(newhr1[0])+':'+str(newhr1[1])
+
+def envSinc2():
+    global newhr2
+    clochr = [hr, min]
+
+    newhr2 = [difC2[0]+clochr[0],difC2[1]+clochr[1]]
+
+    return str(newhr2[0])+':'+str(newhr2[1])
+
+def envSinc3():
+    global newhr3
+    clochr = [hr, min]
+
+    newhr3 = [difC3[0]+clochr[0],difC3[1]+clochr[1]]
+
+    return str(newhr3[0])+':'+str(newhr3[1])
 
 # Após coletar dados
 def nova_janela():
@@ -207,12 +224,27 @@ def nova_janela():
     resultclock = f'{i}{j}'
     #-------------------------------------------------------------------
 
+    horaEnvCliente1()
+    difCli1()
     envSinc1()
     k = 'Hr/Envio Ajustado(C1): '
     l = str(newhr1[0])+':'+str(newhr1[1])
     envio1 = f'{k}{l}'
 
+    horaEnvCliente2()
+    difCli2()
+    envSinc2()
+    k = 'Hr/Envio Ajustado(C2): '
+    l = str(newhr2[0])+':'+str(newhr2[1])
+    envio2 = f'{k}{l}'
 
+    horaEnvCliente3()
+    difCli3()
+    envSinc3()
+    k = 'Hr/Envio Ajustado(C3): '
+    l = str(newhr3[0])+':'+str(newhr3[1])
+    envio3 = f'{k}{l}'
+    #-------------------------------------------------------------------
 
     frame_cima = Frame(janela2, width=410, height=50, bg=c1, relief='flat')
     frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
@@ -247,9 +279,9 @@ def nova_janela():
     # Ajuste do Clock ----------------------------------------------------------------------------------
     ajuste1 = Label(frame_baixo, text=envio1, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste1.place(x=40, y=180)
-    ajuste2 = Label(frame_baixo, text='', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste2 = Label(frame_baixo, text=envio2, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste2.place(x=40, y=205)
-    ajuste3 = Label(frame_baixo, text='', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ajuste3 = Label(frame_baixo, text=envio3, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ajuste3.place(x=40, y=230)
 
     # Ordem de Envio ----------------------------------------------------------------------------------
