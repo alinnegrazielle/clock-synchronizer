@@ -243,7 +243,7 @@ def nova_janela():
     l = str(newhr3[0])+':'+str(newhr3[1])
     envio3 = f'{k}{l}'
     #-------------------------------------------------------------------
-
+    # Ordenando os envios após sincronização
     pegarEnvios = [
         (newhr1),
         (newhr2),
@@ -264,7 +264,7 @@ def nova_janela():
     terceiro = str(ter[0])+':'+str(ter[1])
     ord3 = f'{msgord3}{terceiro}'
 
-
+    #-------------------------------------------------------------------
     frame_cima = Frame(janela2, width=410, height=50, bg=c1, relief='flat')
     frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
 
