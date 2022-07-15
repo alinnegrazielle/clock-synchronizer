@@ -4,7 +4,7 @@
     DUPLA: Alinne Farias e Vitoria Neris.
 '''
 
-from glob import glob
+
 from tkinter import *
 from tkinter import Tk, ttk
 import time
@@ -17,8 +17,6 @@ c1 = "#feffff"  # branca
 c2 = "#3fb5a3"  # verde 
 c3 = "#38576b"  # valor
 c4 = "#403d3d"  # letra 
-
-difC1 = list()
 
 
 # criando janela de input's -------------------------
@@ -246,6 +244,27 @@ def nova_janela():
     envio3 = f'{k}{l}'
     #-------------------------------------------------------------------
 
+    pegarEnvios = [
+        (newhr1),
+        (newhr2),
+        (newhr3),
+    ]
+    print(sorted(pegarEnvios))
+    [pri, seg, ter] = sorted(pegarEnvios)
+
+    msgord1 = '1º Cliente: '
+    primeiro = str(pri[0])+':'+str(pri[1])
+    ord1 = f'{msgord1}{primeiro}'
+
+    msgord2 = '2º Cliente: '
+    segundo = str(seg[0])+':'+str(seg[1])
+    ord2 = f'{msgord2}{segundo}'
+
+    msgord3 = '3º Cliente: '
+    terceiro = str(ter[0])+':'+str(ter[1])
+    ord3 = f'{msgord3}{terceiro}'
+
+
     frame_cima = Frame(janela2, width=410, height=50, bg=c1, relief='flat')
     frame_cima.grid(row=0, column=0, pady=1, padx=0, sticky=NSEW)
 
@@ -287,11 +306,11 @@ def nova_janela():
     # Ordem de Envio ----------------------------------------------------------------------------------
     ode = Label(frame_baixo, text='Ordem de Envio', anchor=NW, font=('Ivy 18 bold'), bg=c1, fg=c4)
     ode.place(x=40, y=275)
-    ode1 = Label(frame_baixo, text='1º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ode1 = Label(frame_baixo, text=ord1, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ode1.place(x=40, y=310)
-    ode2 = Label(frame_baixo, text='2º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ode2 = Label(frame_baixo, text=ord2, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ode2.place(x=40, y=335)
-    ode3 = Label(frame_baixo, text='3º Cliente: ', anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
+    ode3 = Label(frame_baixo, text=ord3, anchor=NE, font=('Ivy 16'), bg=c1, fg=c4)
     ode3.place(x=40, y=360)
 
 ###################################### SERVIDOR ###############################################
